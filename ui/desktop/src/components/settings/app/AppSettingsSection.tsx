@@ -12,6 +12,7 @@ import ThemeSelector from '../../GooseSidebar/ThemeSelector';
 import BlockLogoBlack from './icons/block-lockup_black.png';
 import BlockLogoWhite from './icons/block-lockup_white.png';
 import TelemetrySettings from './TelemetrySettings';
+import LanguageSelector from './LanguageSelector';
 import { trackSettingToggled } from '../../../utils/analytics';
 
 interface AppSettingsSectionProps {
@@ -268,6 +269,8 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
           <ThemeSelector className="w-auto" hideTitle horizontal />
         </CardContent>
       </Card>
+
+      <LanguageSelector />
 
       <TunnelSection />
 

@@ -1,0 +1,134 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "remove": "Remove",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info",
+    "settings": "Settings",
+    "search": "Search",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "done": "Done",
+    "apply": "Apply",
+    "reset": "Reset",
+    "clear": "Clear",
+    "copy": "Copy",
+    "paste": "Paste",
+    "retry": "Retry"
+  },
+  "app": {
+    "name": "goose",
+    "tagline": "a local, extensible, open source AI agent that automates engineering tasks"
+  },
+  "settings": {
+    "title": "Settings",
+    "appearance": {
+      "title": "Appearance",
+      "description": "Configure how goose appears on your system",
+      "notifications": "Notifications",
+      "notificationsManagedByOS": "Notifications are managed by your OS",
+      "configurationGuide": "Configuration guide",
+      "openSettings": "Open Settings",
+      "menuBarIcon": "Menu bar icon",
+      "menuBarIconDesc": "Show goose in the menu bar",
+      "dockIcon": "Dock icon",
+      "dockIconDesc": "Show goose in the dock",
+      "preventSleep": "Prevent Sleep",
+      "preventSleepDesc": "Keep your computer awake while goose is running a task (screen can still lock)",
+      "costTracking": "Cost Tracking",
+      "costTrackingDesc": "Show model pricing and usage costs"
+    },
+    "theme": {
+      "title": "Theme",
+      "description": "Customize the look and feel of goose",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "language": {
+      "title": "Language",
+      "description": "Select the display language for the application",
+      "selectLanguage": "Select language",
+      "japanese": "日本語",
+      "english": "English"
+    },
+    "helpFeedback": {
+      "title": "Help & feedback",
+      "description": "Help us improve goose by reporting issues or requesting new features",
+      "reportBug": "Report a Bug",
+      "requestFeature": "Request a Feature"
+    },
+    "version": {
+      "title": "Version"
+    },
+    "updates": {
+      "title": "Updates",
+      "description": "Check for and install updates to keep goose running at its best"
+    },
+    "models": {
+      "title": "Models",
+      "description": "Configure AI models and providers"
+    },
+    "extensions": {
+      "title": "Extensions",
+      "description": "Manage extensions"
+    },
+    "sessions": {
+      "title": "Sessions",
+      "description": "Manage chat sessions"
+    },
+    "permissions": {
+      "title": "Permissions",
+      "description": "Configure application permissions"
+    }
+  },
+  "chat": {
+    "newChat": "New Chat",
+    "sendMessage": "Send message",
+    "placeholder": "Type a message...",
+    "thinking": "Thinking...",
+    "stopGenerating": "Stop generating"
+  },
+  "sessions": {
+    "title": "Sessions",
+    "noSessions": "No sessions",
+    "resume": "Resume",
+    "delete": "Delete"
+  },
+  "notifications": {
+    "howToEnable": "How to Enable Notifications",
+    "macInstructions": {
+      "title": "To enable notifications on macOS:",
+      "step1": "Open System Preferences",
+      "step2": "Click on Notifications",
+      "step3": "Find and select goose in the application list",
+      "step4": "Enable notifications and adjust settings as desired"
+    },
+    "windowsInstructions": {
+      "title": "To enable notifications on Windows:",
+      "step1": "Open Settings",
+      "step2": "Go to System > Notifications",
+      "step3": "Find and select goose in the application list",
+      "step4": "Toggle notifications on and adjust settings as desired"
+    }
+  },
+  "errors": {
+    "generic": "An error occurred",
+    "networkError": "Network error",
+    "unauthorized": "Authorization required",
+    "notFound": "Not found",
+    "serverError": "Server error"
+  }
+}
