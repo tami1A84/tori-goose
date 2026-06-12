@@ -44,6 +44,7 @@ export interface Settings {
   useSystemTheme: boolean;
   responseStyle: string;
   showPricing: boolean;
+  language: 'system' | 'en' | 'ja';
   sessionSharing: SessionSharingConfig;
   seenAnnouncementIds: string[];
 }
@@ -83,6 +84,7 @@ export const defaultSettings: Settings = {
   useSystemTheme: true,
   responseStyle: 'concise',
   showPricing: true,
+  language: 'system',
   sessionSharing: {
     enabled: false,
     baseUrl: '',

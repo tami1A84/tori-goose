@@ -4274,6 +4274,27 @@
   "settings.help.title": {
     "defaultMessage": "Help & feedback"
   },
+  "settings.language.description": {
+    "defaultMessage": "Choose the display language for goose. Changes take effect after restart."
+  },
+  "settings.language.english": {
+    "defaultMessage": "English"
+  },
+  "settings.language.japanese": {
+    "defaultMessage": "日本語"
+  },
+  "settings.language.restartNow": {
+    "defaultMessage": "Restart app"
+  },
+  "settings.language.restartRequired": {
+    "defaultMessage": "Restart the app to apply the language change."
+  },
+  "settings.language.system": {
+    "defaultMessage": "Use system language"
+  },
+  "settings.language.title": {
+    "defaultMessage": "Language"
+  },
   "settings.menuBarIcon.description": {
     "defaultMessage": "Show goose in the menu bar"
   },
