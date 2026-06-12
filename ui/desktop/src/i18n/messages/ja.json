@@ -4274,6 +4274,27 @@
   "settings.help.title": {
     "defaultMessage": "ヘルプとフィードバック"
   },
+  "settings.language.description": {
+    "defaultMessage": "goose の表示言語を選択します。変更は再起動後に反映されます。"
+  },
+  "settings.language.english": {
+    "defaultMessage": "English"
+  },
+  "settings.language.japanese": {
+    "defaultMessage": "日本語"
+  },
+  "settings.language.restartNow": {
+    "defaultMessage": "アプリを再起動"
+  },
+  "settings.language.restartRequired": {
+    "defaultMessage": "言語の変更を反映するにはアプリを再起動してください。"
+  },
+  "settings.language.system": {
+    "defaultMessage": "システム設定に従う"
+  },
+  "settings.language.title": {
+    "defaultMessage": "言語"
+  },
   "settings.menuBarIcon.description": {
     "defaultMessage": "メニューバーにgooseを表示します"
   },

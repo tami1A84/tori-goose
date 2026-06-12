@@ -204,6 +204,13 @@ const MENU_TRANSLATIONS_JA: Record<string, string> = {
 
 
 function detectMenuLocale(): string {
+  try {
+    const language = getSettings().language;
+    if (language === 'en' || language === 'ja') return language;
+  } catch {
+    // Settings may not be readable during early startup; fall back below.
+  }
+
   const explicit = process.env.GOOSE_LOCALE;
   if (explicit) return explicit;
   try {
@@ -395,6 +402,16 @@ app.on('certificate-error', (event, _webContents, url, _error, certificate, call
 // Kept separate from the initial appConfig assignment above because
 // app.getSystemLocale() is only available after the app.ready event fires.
 app.whenReady().then(() => {
+  try {
+    const language = getSettings().language;
+    if (language === 'en' || language === 'ja') {
+      appConfig.GOOSE_LOCALE = language;
+      return;
+    }
+  } catch {
+    // Settings are best-effort; fall back to env/OS locale below.
+  }
+
   if (!appConfig.GOOSE_LOCALE) {
     try {
       const sysLocale = app.getSystemLocale();
@@ -1698,6 +1715,7 @@ const validSettingKeys: Set<string> = new Set([
   'useSystemTheme',
   'responseStyle',
   'showPricing',
+  'language',
   'sessionSharing',
   'seenAnnouncementIds',
 ]);

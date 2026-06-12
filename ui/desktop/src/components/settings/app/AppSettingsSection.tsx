@@ -116,6 +116,19 @@ const i18n = defineMessages({
     id: 'settings.notifications.modal.winStep4',
     defaultMessage: 'Toggle notifications on and adjust settings as desired',
   },
+  languageTitle: { id: 'settings.language.title', defaultMessage: 'Language' },
+  languageDesc: {
+    id: 'settings.language.description',
+    defaultMessage: 'Choose the display language for goose. Changes take effect after restart.',
+  },
+  languageSystem: { id: 'settings.language.system', defaultMessage: 'Use system language' },
+  languageEnglish: { id: 'settings.language.english', defaultMessage: 'English' },
+  languageJapanese: { id: 'settings.language.japanese', defaultMessage: '日本語' },
+  languageRestartRequired: {
+    id: 'settings.language.restartRequired',
+    defaultMessage: 'Restart the app to apply the language change.',
+  },
+  languageRestartNow: { id: 'settings.language.restartNow', defaultMessage: 'Restart app' },
   close: { id: 'settings.close', defaultMessage: 'Close' },
 });
 
@@ -132,6 +145,8 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
   const [isDockSwitchDisabled, setIsDockSwitchDisabled] = useState(false);
   const [showNotificationModal, setShowNotificationModal] = useState(false);
   const [showPricing, setShowPricing] = useState(true);
+  const [language, setLanguage] = useState<'system' | 'en' | 'ja'>('system');
+  const [languageChanged, setLanguageChanged] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const updateSectionRef = useRef<HTMLDivElement>(null);
   const shouldShowUpdates = !window.appConfig.get('GOOSE_VERSION');
@@ -158,6 +173,9 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
 
   useEffect(() => {
     window.electron.getSetting('showPricing').then(setShowPricing);
+    window.electron.getSetting('language').then((value) => {
+      setLanguage(value ?? 'system');
+    });
   }, []);
 
   useEffect(() => {
@@ -251,6 +269,13 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
     trackSettingToggled('cost_tracking', checked);
     // Trigger event for other components
     window.dispatchEvent(new CustomEvent('showPricingChanged'));
+  };
+
+  const handleLanguageChange = async (value: 'system' | 'en' | 'ja') => {
+    setLanguage(value);
+    await window.electron.setSetting('language', value);
+    setLanguageChanged(true);
+    trackSettingToggled('language', value !== 'system');
   };
 
   const intl = useIntl();
@@ -398,6 +423,48 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
         </CardHeader>
         <CardContent className="pt-4 px-4">
           <ThemeSelector className="w-auto" hideTitle horizontal />
+        </CardContent>
+      </Card>
+
+      <Card className="rounded-lg">
+        <CardHeader className="pb-0">
+          <CardTitle className="mb-1">{intl.formatMessage(i18n.languageTitle)}</CardTitle>
+          <CardDescription>{intl.formatMessage(i18n.languageDesc)}</CardDescription>
+        </CardHeader>
+        <CardContent className="pt-4 px-4 space-y-3">
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant={language === 'system' ? 'default' : 'secondary'}
+              size="sm"
+              onClick={() => handleLanguageChange('system')}
+            >
+              {intl.formatMessage(i18n.languageSystem)}
+            </Button>
+            <Button
+              variant={language === 'en' ? 'default' : 'secondary'}
+              size="sm"
+              onClick={() => handleLanguageChange('en')}
+            >
+              {intl.formatMessage(i18n.languageEnglish)}
+            </Button>
+            <Button
+              variant={language === 'ja' ? 'default' : 'secondary'}
+              size="sm"
+              onClick={() => handleLanguageChange('ja')}
+            >
+              {intl.formatMessage(i18n.languageJapanese)}
+            </Button>
+          </div>
+          {languageChanged && (
+            <div className="flex items-center justify-between gap-3 rounded-md border border-border-subtle bg-background-secondary p-3">
+              <p className="text-xs text-text-secondary">
+                {intl.formatMessage(i18n.languageRestartRequired)}
+              </p>
+              <Button variant="secondary" size="sm" onClick={() => window.electron.restartApp()}>
+                {intl.formatMessage(i18n.languageRestartNow)}
+              </Button>
+            </div>
+          )}
         </CardContent>
       </Card>
 
