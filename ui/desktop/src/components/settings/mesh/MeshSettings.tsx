@@ -19,6 +19,127 @@ import {
   getCustomProvider,
 } from '../../../api';
 import { useModelAndProvider } from '../../ModelAndProviderContext';
+import { defineMessages, useIntl } from '../../../i18n';
+
+const i18n = defineMessages({
+  inferenceMesh: { id: 'meshSettings.inferenceMesh', defaultMessage: 'Inference Mesh' },
+  failedToActivateModel: {
+    id: 'meshSettings.failedToActivateModel',
+    defaultMessage: 'Failed to activate model: {error}',
+  },
+  inviteTokenRequired: {
+    id: 'meshSettings.inviteTokenRequired',
+    defaultMessage: 'Paste an invite token to join a mesh',
+  },
+  failedToStartMesh: { id: 'meshSettings.failedToStartMesh', defaultMessage: 'Failed to start mesh-llm' },
+  meshReadyTimeout: {
+    id: 'meshSettings.meshReadyTimeout',
+    defaultMessage: 'mesh-llm did not become ready. Check ~/.mesh-llm/mesh-llm.log',
+  },
+  failedToStart: { id: 'meshSettings.failedToStart', defaultMessage: 'Failed to start: {error}' },
+  failedToStopMesh: { id: 'meshSettings.failedToStopMesh', defaultMessage: 'Failed to stop mesh-llm' },
+  runningStatus: {
+    id: 'meshSettings.runningStatus',
+    defaultMessage: 'Running — {modelCount, plural, one {# model} other {# models}} available',
+  },
+  peerCount: { id: 'meshSettings.peerCount', defaultMessage: '{peerCount, plural, one {# peer} other {# peers}}' },
+  startingStatus: {
+    id: 'meshSettings.startingStatus',
+    defaultMessage: 'Starting — this may take a minute if downloading a model...',
+  },
+  downloadingStatus: {
+    id: 'meshSettings.downloadingStatus',
+    defaultMessage: 'Downloading latest mesh-llm (~19 MB)...',
+  },
+  notInstalledStatus: { id: 'meshSettings.notInstalledStatus', defaultMessage: 'mesh-llm not installed' },
+  notRunning: { id: 'meshSettings.notRunning', defaultMessage: 'Not running' },
+  checking: { id: 'meshSettings.checking', defaultMessage: 'Checking...' },
+  learnMore: { id: 'meshSettings.learnMore', defaultMessage: 'Learn more' },
+  experimental: { id: 'meshSettings.experimental', defaultMessage: 'Experimental.' },
+  description: {
+    id: 'meshSettings.description',
+    defaultMessage:
+      'Pool GPUs with others for decentralized LLM inference — no API keys, no cloud. Start a private mesh, join one with an invite token, or discover public meshes.',
+  },
+  getStarted: { id: 'meshSettings.getStarted', defaultMessage: 'Get started' },
+  installDescription: {
+    id: 'meshSettings.installDescription',
+    defaultMessage:
+      'mesh-llm is not installed. Follow the install guide to set it up, or connect to a mesh already running on this machine.',
+  },
+  installGuide: { id: 'meshSettings.installGuide', defaultMessage: 'Install guide' },
+  checkAgain: { id: 'meshSettings.checkAgain', defaultMessage: 'Check Again' },
+  downloadTitle: { id: 'meshSettings.downloadTitle', defaultMessage: 'Downloading latest mesh-llm...' },
+  downloadDescription: {
+    id: 'meshSettings.downloadDescription',
+    defaultMessage: 'Fetching the latest version to ~/.mesh-llm/. This should only take a moment.',
+  },
+  autoDiscover: { id: 'meshSettings.autoDiscover', defaultMessage: 'Auto-discover a public mesh' },
+  autoDiscoverDescription: {
+    id: 'meshSettings.autoDiscoverDescription',
+    defaultMessage: 'Find and join the best available mesh automatically.',
+  },
+  publicMeshWarning: {
+    id: 'meshSettings.publicMeshWarning',
+    defaultMessage:
+      'Public meshes are run by volunteers. Your prompts are sent to their hardware — no privacy guarantees.',
+  },
+  joinWithInviteToken: { id: 'meshSettings.joinWithInviteToken', defaultMessage: 'Join with invite token' },
+  joinWithInviteTokenDescription: {
+    id: 'meshSettings.joinWithInviteTokenDescription',
+    defaultMessage: 'Join a private mesh someone shared with you.',
+  },
+  startNewPrivateMesh: { id: 'meshSettings.startNewPrivateMesh', defaultMessage: 'Start a new private mesh' },
+  startNewPrivateMeshDescription: {
+    id: 'meshSettings.startNewPrivateMeshDescription',
+    defaultMessage: 'Create your own mesh. Share the invite token with others to pool GPUs.',
+  },
+  modelToServe: { id: 'meshSettings.modelToServe', defaultMessage: 'Model to serve' },
+  modelDownloadHint: {
+    id: 'meshSettings.modelDownloadHint',
+    defaultMessage: 'Downloads automatically if not already cached. Larger models need more VRAM.',
+  },
+  inviteToken: { id: 'meshSettings.inviteToken', defaultMessage: 'Invite token' },
+  inviteTokenPlaceholder: { id: 'meshSettings.inviteTokenPlaceholder', defaultMessage: 'Paste invite token here' },
+  contributeGpu: { id: 'meshSettings.contributeGpu', defaultMessage: 'Contribute GPU' },
+  serveModelsForOthers: { id: 'meshSettings.serveModelsForOthers', defaultMessage: '(serve models for others too)' },
+  startMesh: { id: 'meshSettings.startMesh', defaultMessage: 'Start Mesh' },
+  keepGooseRunning: {
+    id: 'meshSettings.keepGooseRunning',
+    defaultMessage: 'When you start the mesh, keep goose running to stay connected.',
+  },
+  startingTitle: { id: 'meshSettings.startingTitle', defaultMessage: 'Starting mesh-llm...' },
+  startingDescription: {
+    id: 'meshSettings.startingDescription',
+    defaultMessage: 'Connecting to the mesh and loading models. This may take a minute on first run.',
+  },
+  shareTokenDescription: {
+    id: 'meshSettings.shareTokenDescription',
+    defaultMessage: 'Share this with others so they can join your mesh.',
+  },
+  copied: { id: 'meshSettings.copied', defaultMessage: 'Copied' },
+  copy: { id: 'meshSettings.copy', defaultMessage: 'Copy' },
+  availableModels: { id: 'meshSettings.availableModels', defaultMessage: 'Available Models' },
+  selectModel: { id: 'meshSettings.selectModel', defaultMessage: 'Select a model to use it as your Goose provider.' },
+  live: { id: 'meshSettings.live', defaultMessage: 'live' },
+  active: { id: 'meshSettings.active', defaultMessage: 'Active' },
+  use: { id: 'meshSettings.use', defaultMessage: 'Use' },
+  noModels: {
+    id: 'meshSettings.noModels',
+    defaultMessage: 'Mesh is running but no models are available yet. A model may still be loading.',
+  },
+  keepGooseRunningConnected: {
+    id: 'meshSettings.keepGooseRunningConnected',
+    defaultMessage: 'Keep goose running to stay connected to the mesh.',
+  },
+  stopMesh: { id: 'meshSettings.stopMesh', defaultMessage: 'Stop Mesh' },
+  openConsole: { id: 'meshSettings.openConsole', defaultMessage: 'Open Console' },
+  advanced: { id: 'meshSettings.advanced', defaultMessage: 'Advanced' },
+  binary: { id: 'meshSettings.binary', defaultMessage: 'Binary' },
+  apiEndpoint: { id: 'meshSettings.apiEndpoint', defaultMessage: 'API endpoint' },
+  console: { id: 'meshSettings.console', defaultMessage: 'Console' },
+  refresh: { id: 'meshSettings.refresh', defaultMessage: 'Refresh' },
+});
 const MESH_API_PORT = 9337;
 const MESH_CONSOLE_PORT = 3131;
 const MESH_DEFAULT_MODEL = 'Qwen3-30B-A3B-Q4_K_M';
@@ -50,6 +171,7 @@ interface MeshStatusInfo {
 }
 
 export const MeshSettings = () => {
+  const intl = useIntl();
   const { refreshCurrentModelAndProvider } = useModelAndProvider();
   const isMacOS = window.electron.platform === 'darwin' && window.electron.arch === 'arm64';
   const [status, setStatus] = useState<MeshStatus>('unknown');
@@ -108,7 +230,7 @@ export const MeshSettings = () => {
 
   const meshProviderBody = (models: string[]) => ({
     engine: 'openai_compatible' as const,
-    display_name: 'Inference Mesh',
+    display_name: intl.formatMessage(i18n.inferenceMesh),
     api_url: `http://localhost:${MESH_API_PORT}`,
     api_key: '',
     models,
@@ -161,7 +283,7 @@ export const MeshSettings = () => {
       await refreshCurrentModelAndProvider();
       setActiveModel(modelId);
     } catch (err) {
-      setError(`Failed to activate model: ${err}`);
+      setError(intl.formatMessage(i18n.failedToActivateModel, { error: String(err) }));
     } finally {
       setSaving(false);
     }
@@ -178,7 +300,7 @@ export const MeshSettings = () => {
         args.push('serve', '--model', selectedModel);
       } else if (mode === 'join') {
         if (!joinToken.trim()) {
-          setError('Paste an invite token to join a mesh');
+          setError(intl.formatMessage(i18n.inviteTokenRequired));
           setStatus('stopped');
           return;
         }
@@ -198,7 +320,7 @@ export const MeshSettings = () => {
 
       const result = await window.electron.startMesh(args);
       if (!result.started) {
-        setError(result.error || 'Failed to start mesh-llm');
+        setError(result.error || intl.formatMessage(i18n.failedToStartMesh));
         setStatus('stopped');
         return;
       }
@@ -212,14 +334,14 @@ export const MeshSettings = () => {
         startTimeoutRef.current = null;
         setStatus((prev) => {
           if (prev === 'starting') {
-            setError('mesh-llm did not become ready. Check ~/.mesh-llm/mesh-llm.log');
+            setError(intl.formatMessage(i18n.meshReadyTimeout));
             return 'stopped';
           }
           return prev;
         });
       }, 300000);
     } catch (err) {
-      setError(`Failed to start: ${err}`);
+      setError(intl.formatMessage(i18n.failedToStart, { error: String(err) }));
       setStatus('stopped');
     }
   };
@@ -231,10 +353,10 @@ export const MeshSettings = () => {
         setStatus('stopped');
         setStatusInfo((prev) => ({ ...prev, running: false, models: [], token: undefined }));
       } else {
-        setError('Failed to stop mesh-llm');
+        setError(intl.formatMessage(i18n.failedToStopMesh));
       }
     } catch {
-      setError('Failed to stop mesh-llm');
+      setError(intl.formatMessage(i18n.failedToStopMesh));
     }
   };
 
@@ -252,11 +374,10 @@ export const MeshSettings = () => {
         return (
           <span className="flex items-center gap-1.5 text-xs text-green-500">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            Running — {statusInfo.models.length} model
-            {statusInfo.models.length !== 1 ? 's' : ''} available
+            {intl.formatMessage(i18n.runningStatus, { modelCount: statusInfo.models.length })}
             {statusInfo.peerCount !== undefined && statusInfo.peerCount > 0 && (
               <span className="text-text-muted ml-1">
-                · {statusInfo.peerCount} peer{statusInfo.peerCount !== 1 ? 's' : ''}
+                · {intl.formatMessage(i18n.peerCount, { peerCount: statusInfo.peerCount })}
               </span>
             )}
           </span>
@@ -265,21 +386,21 @@ export const MeshSettings = () => {
         return (
           <span className="flex items-center gap-1.5 text-xs text-yellow-500">
             <RefreshCw className="w-3 h-3 animate-spin" />
-            Starting — this may take a minute if downloading a model...
+            {intl.formatMessage(i18n.startingStatus)}
           </span>
         );
       case 'downloading':
         return (
           <span className="flex items-center gap-1.5 text-xs text-yellow-500">
             <RefreshCw className="w-3 h-3 animate-spin" />
-            Downloading latest mesh-llm (~19 MB)...
+            {intl.formatMessage(i18n.downloadingStatus)}
           </span>
         );
       case 'not-installed':
         return (
           <span className="flex items-center gap-1.5 text-xs text-text-muted">
             <span className="w-2 h-2 rounded-full bg-orange-400" />
-            mesh-llm not installed
+            {intl.formatMessage(i18n.notInstalledStatus)}
           </span>
         );
       case 'stopped':
@@ -290,14 +411,14 @@ export const MeshSettings = () => {
             ) : (
               <span className="w-2 h-2 rounded-full bg-gray-400" />
             )}
-            Not running
+            {intl.formatMessage(i18n.notRunning)}
           </span>
         );
       default:
         return checking ? (
           <span className="flex items-center gap-1.5 text-xs text-text-muted">
             <RefreshCw className="w-3 h-3 animate-spin" />
-            Checking...
+            {intl.formatMessage(i18n.checking)}
           </span>
         ) : null;
     }
@@ -308,7 +429,7 @@ export const MeshSettings = () => {
       {/* Header */}
       <div>
         <div className="flex items-center justify-between">
-          <h3 className="text-text-default font-medium">Inference Mesh</h3>
+          <h3 className="text-text-default font-medium">{intl.formatMessage(i18n.inferenceMesh)}</h3>
           <a
             href="https://docs.anarchai.org/"
             target="_blank"
@@ -316,13 +437,12 @@ export const MeshSettings = () => {
             className="inline-flex items-center text-xs text-text-muted hover:text-text-default transition-colors"
           >
             <ExternalLink className="w-3 h-3 mr-1" />
-            Learn more
+            {intl.formatMessage(i18n.learnMore)}
           </a>
         </div>
         <p className="text-xs text-text-muted max-w-2xl mt-1">
-          <span className="text-orange-400 font-medium">Experimental.</span> Pool GPUs with others
-          for decentralized LLM inference — no API keys, no cloud. Start a private mesh, join one
-          with an invite token, or discover public meshes.{' '}
+          <span className="text-orange-400 font-medium">{intl.formatMessage(i18n.experimental)}</span>{' '}
+          {intl.formatMessage(i18n.description)}{' '}
           <a
             href="https://docs.anarchai.org/"
             target="_blank"
@@ -341,21 +461,20 @@ export const MeshSettings = () => {
       {/* Not installed — non-macOS only; on macOS start-mesh handles the download */}
       {status === 'not-installed' && (
         <div className="border border-border-subtle rounded-xl p-4 bg-background-default">
-          <p className="text-sm font-medium text-text-default">Get started</p>
+          <p className="text-sm font-medium text-text-default">{intl.formatMessage(i18n.getStarted)}</p>
           <p className="text-xs text-text-muted mt-1">
-            mesh-llm is not installed. Follow the install guide to set it up, or connect to a mesh
-            already running on this machine.
+            {intl.formatMessage(i18n.installDescription)}
           </p>
           <div className="flex items-center gap-2 mt-3">
             <a href="https://docs.anarchai.org/" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="sm">
                 <ExternalLink className="w-3 h-3 mr-1" />
-                Install guide
+                {intl.formatMessage(i18n.installGuide)}
               </Button>
             </a>
             <Button variant="ghost" size="sm" onClick={checkStatus}>
               <RefreshCw className="w-3 h-3 mr-1" />
-              Check Again
+              {intl.formatMessage(i18n.checkAgain)}
             </Button>
           </div>
         </div>
@@ -364,9 +483,9 @@ export const MeshSettings = () => {
       {/* Downloading */}
       {status === 'downloading' && (
         <div className="border border-yellow-500/30 rounded-xl p-4 bg-yellow-500/5">
-          <p className="text-sm font-medium text-text-default">Downloading latest mesh-llm...</p>
+          <p className="text-sm font-medium text-text-default">{intl.formatMessage(i18n.downloadTitle)}</p>
           <p className="text-xs text-text-muted mt-1">
-            Fetching the latest version to ~/.mesh-llm/. This should only take a moment.
+            {intl.formatMessage(i18n.downloadDescription)}
           </p>
         </div>
       )}
@@ -385,14 +504,13 @@ export const MeshSettings = () => {
               />
               <div>
                 <span className="text-sm font-medium text-text-default">
-                  Auto-discover a public mesh
+                  {intl.formatMessage(i18n.autoDiscover)}
                 </span>
                 <p className="text-xs text-text-muted">
-                  Find and join the best available mesh automatically.
+                  {intl.formatMessage(i18n.autoDiscoverDescription)}
                 </p>
                 <p className="text-xs text-orange-400 mt-0.5">
-                  Public meshes are run by volunteers. Your prompts are sent to their hardware — no
-                  privacy guarantees.
+                  {intl.formatMessage(i18n.publicMeshWarning)}
                 </p>
               </div>
             </label>
@@ -406,10 +524,10 @@ export const MeshSettings = () => {
               />
               <div>
                 <span className="text-sm font-medium text-text-default">
-                  Join with invite token
+                  {intl.formatMessage(i18n.joinWithInviteToken)}
                 </span>
                 <p className="text-xs text-text-muted">
-                  Join a private mesh someone shared with you.
+                  {intl.formatMessage(i18n.joinWithInviteTokenDescription)}
                 </p>
               </div>
             </label>
@@ -423,10 +541,10 @@ export const MeshSettings = () => {
               />
               <div>
                 <span className="text-sm font-medium text-text-default">
-                  Start a new private mesh
+                  {intl.formatMessage(i18n.startNewPrivateMesh)}
                 </span>
                 <p className="text-xs text-text-muted">
-                  Create your own mesh. Share the invite token with others to pool GPUs.
+                  {intl.formatMessage(i18n.startNewPrivateMeshDescription)}
                 </p>
               </div>
             </label>
@@ -435,7 +553,7 @@ export const MeshSettings = () => {
           {/* Mode-specific options */}
           {mode === 'new' && (
             <div className="pl-6 space-y-2">
-              <label className="text-xs text-text-default block">Model to serve</label>
+              <label className="text-xs text-text-default block">{intl.formatMessage(i18n.modelToServe)}</label>
               <select
                 value={selectedModel}
                 onChange={(e) => setSelectedModel(e.target.value)}
@@ -448,19 +566,19 @@ export const MeshSettings = () => {
                 ))}
               </select>
               <p className="text-xs text-text-muted">
-                Downloads automatically if not already cached. Larger models need more VRAM.
+                {intl.formatMessage(i18n.modelDownloadHint)}
               </p>
             </div>
           )}
 
           {mode === 'join' && (
             <div className="pl-6 space-y-2">
-              <label className="text-xs text-text-default block">Invite token</label>
+              <label className="text-xs text-text-default block">{intl.formatMessage(i18n.inviteToken)}</label>
               <Input
                 type="text"
                 value={joinToken}
                 onChange={(e) => setJoinToken(e.target.value)}
-                placeholder="Paste invite token here"
+                placeholder={intl.formatMessage(i18n.inviteTokenPlaceholder)}
                 className="max-w-md"
               />
             </div>
@@ -474,19 +592,19 @@ export const MeshSettings = () => {
                 onChange={(e) => setContributeGpu(e.target.checked)}
               />
               <span className="text-sm text-text-default">
-                Contribute GPU
-                <span className="text-text-muted ml-1">(serve models for others too)</span>
+                {intl.formatMessage(i18n.contributeGpu)}
+                <span className="text-text-muted ml-1">{intl.formatMessage(i18n.serveModelsForOthers)}</span>
               </span>
             </label>
           )}
 
           <Button onClick={startMesh} disabled={checking} size="sm">
             <Play className="w-3 h-3 mr-1" />
-            Start Mesh
+            {intl.formatMessage(i18n.startMesh)}
           </Button>
 
           <p className="text-xs text-text-muted">
-            When you start the mesh, keep goose running to stay connected.
+            {intl.formatMessage(i18n.keepGooseRunning)}
           </p>
         </div>
       )}
@@ -494,9 +612,9 @@ export const MeshSettings = () => {
       {/* Starting indicator */}
       {status === 'starting' && (
         <div className="border border-yellow-500/30 rounded-xl p-4 bg-yellow-500/5">
-          <p className="text-sm font-medium text-text-default">Starting mesh-llm...</p>
+          <p className="text-sm font-medium text-text-default">{intl.formatMessage(i18n.startingTitle)}</p>
           <p className="text-xs text-text-muted mt-1">
-            Connecting to the mesh and loading models. This may take a minute on first run.
+            {intl.formatMessage(i18n.startingDescription)}
           </p>
         </div>
       )}
@@ -509,21 +627,21 @@ export const MeshSettings = () => {
             <div className="border border-border-subtle rounded-xl p-4 bg-background-default">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-text-default">Invite token</p>
+                  <p className="text-sm font-medium text-text-default">{intl.formatMessage(i18n.inviteToken)}</p>
                   <p className="text-xs text-text-muted mt-0.5">
-                    Share this with others so they can join your mesh.
+                    {intl.formatMessage(i18n.shareTokenDescription)}
                   </p>
                 </div>
                 <Button variant="outline" size="sm" onClick={copyToken}>
                   {copiedToken ? (
                     <>
                       <Check className="w-3 h-3 mr-1" />
-                      Copied
+                      {intl.formatMessage(i18n.copied)}
                     </>
                   ) : (
                     <>
                       <Copy className="w-3 h-3 mr-1" />
-                      Copy
+                      {intl.formatMessage(i18n.copy)}
                     </>
                   )}
                 </Button>
@@ -537,9 +655,9 @@ export const MeshSettings = () => {
           {/* Model list */}
           {statusInfo.models.length > 0 && (
             <div>
-              <h4 className="text-sm font-medium text-text-default mb-2">Available Models</h4>
+              <h4 className="text-sm font-medium text-text-default mb-2">{intl.formatMessage(i18n.availableModels)}</h4>
               <p className="text-xs text-text-muted mb-3">
-                Select a model to use it as your Goose provider.
+                {intl.formatMessage(i18n.selectModel)}
               </p>
               <div className="space-y-2">
                 {statusInfo.models.map((modelId) => {
@@ -557,10 +675,10 @@ export const MeshSettings = () => {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <span className="text-sm font-medium text-text-default">{modelId}</span>
-                          <span className="text-xs text-green-500">live</span>
+                          <span className="text-xs text-green-500">{intl.formatMessage(i18n.live)}</span>
                         </div>
                         {isActive ? (
-                          <span className="text-xs font-medium text-green-500">Active</span>
+                          <span className="text-xs font-medium text-green-500">{intl.formatMessage(i18n.active)}</span>
                         ) : (
                           <Button
                             variant="outline"
@@ -572,7 +690,7 @@ export const MeshSettings = () => {
                             disabled={saving}
                           >
                             <Zap className="w-3 h-3 mr-1" />
-                            Use
+                            {intl.formatMessage(i18n.use)}
                           </Button>
                         )}
                       </div>
@@ -585,19 +703,19 @@ export const MeshSettings = () => {
 
           {statusInfo.models.length === 0 && (
             <p className="text-xs text-text-muted">
-              Mesh is running but no models are available yet. A model may still be loading.
+              {intl.formatMessage(i18n.noModels)}
             </p>
           )}
 
           <p className="text-xs text-text-muted">
-            Keep goose running to stay connected to the mesh.
+            {intl.formatMessage(i18n.keepGooseRunningConnected)}
           </p>
 
           {/* Actions row */}
           <div className="flex items-center gap-2">
             <Button variant="outline" size="sm" onClick={stopMesh}>
               <Square className="w-3 h-3 mr-1" />
-              Stop Mesh
+              {intl.formatMessage(i18n.stopMesh)}
             </Button>
             <a
               href={`http://localhost:${MESH_CONSOLE_PORT}`}
@@ -606,7 +724,7 @@ export const MeshSettings = () => {
               className="inline-flex items-center text-xs text-text-muted hover:text-text-default transition-colors px-2 py-1"
             >
               <ExternalLink className="w-3 h-3 mr-1" />
-              Open Console
+              {intl.formatMessage(i18n.openConsole)}
             </a>
           </div>
         </>
@@ -623,23 +741,23 @@ export const MeshSettings = () => {
           ) : (
             <ChevronRight className="w-3 h-3" />
           )}
-          Advanced
+          {intl.formatMessage(i18n.advanced)}
         </button>
 
         {showAdvanced && (
           <div className="mt-3 space-y-3">
             {statusInfo.binaryPath && (
               <div>
-                <label className="text-xs text-text-muted block">Binary</label>
+                <label className="text-xs text-text-muted block">{intl.formatMessage(i18n.binary)}</label>
                 <code className="text-xs text-text-default">{statusInfo.binaryPath}</code>
               </div>
             )}
             <div>
-              <label className="text-xs text-text-muted block">API endpoint</label>
+              <label className="text-xs text-text-muted block">{intl.formatMessage(i18n.apiEndpoint)}</label>
               <code className="text-xs text-text-default">http://localhost:{MESH_API_PORT}/v1</code>
             </div>
             <div>
-              <label className="text-xs text-text-muted block">Console</label>
+              <label className="text-xs text-text-muted block">{intl.formatMessage(i18n.console)}</label>
               <code className="text-xs text-text-default">
                 http://localhost:{MESH_CONSOLE_PORT}
               </code>
@@ -652,7 +770,7 @@ export const MeshSettings = () => {
       <div className="flex justify-end">
         <Button variant="ghost" size="sm" onClick={checkStatus}>
           <RefreshCw className="w-3 h-3 mr-1" />
-          Refresh
+          {intl.formatMessage(i18n.refresh)}
         </Button>
       </div>
     </div>

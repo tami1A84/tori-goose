@@ -22,6 +22,10 @@ const i18n = defineMessages({
     id: 'modelSettingsPanel.saving',
     defaultMessage: 'Saving...',
   },
+  placeholderAuto: { id: 'modelSettingsPanel.placeholderAuto', defaultMessage: 'Auto' },
+  placeholderNoLimit: { id: 'modelSettingsPanel.placeholderNoLimit', defaultMessage: 'No limit' },
+  placeholderRandom: { id: 'modelSettingsPanel.placeholderRandom', defaultMessage: 'Random' },
+  placeholderAll: { id: 'modelSettingsPanel.placeholderAll', defaultMessage: 'All' },
   reset: {
     id: 'modelSettingsPanel.reset',
     defaultMessage: 'Reset',
@@ -528,7 +532,7 @@ export const ModelSettingsPanel = ({ modelId }: { modelId: string }) => {
             description={intl.formatMessage(i18n.contextSizeDescription)}
             value={settings.context_size}
             onChange={(v) => updateField('context_size', v)}
-            placeholder="Auto"
+            placeholder={intl.formatMessage(i18n.placeholderAuto)}
             min={0}
             allowNull
           />
@@ -537,7 +541,7 @@ export const ModelSettingsPanel = ({ modelId }: { modelId: string }) => {
             description={intl.formatMessage(i18n.maxOutputTokensDescription)}
             value={settings.max_output_tokens}
             onChange={(v) => updateField('max_output_tokens', v)}
-            placeholder="No limit"
+            placeholder={intl.formatMessage(i18n.placeholderNoLimit)}
             min={1}
             allowNull
           />
@@ -593,7 +597,7 @@ export const ModelSettingsPanel = ({ modelId }: { modelId: string }) => {
               label={intl.formatMessage(i18n.seed)}
               value={settings.sampling.seed}
               onChange={(v) => updateSampling({ seed: v })}
-              placeholder="Random"
+              placeholder={intl.formatMessage(i18n.placeholderRandom)}
               min={0}
               allowNull
             />
@@ -621,7 +625,7 @@ export const ModelSettingsPanel = ({ modelId }: { modelId: string }) => {
               label={intl.formatMessage(i18n.seed)}
               value={settings.sampling.seed}
               onChange={(v) => updateSampling({ seed: v })}
-              placeholder="Random"
+              placeholder={intl.formatMessage(i18n.placeholderRandom)}
               min={0}
               allowNull
             />
@@ -678,7 +682,7 @@ export const ModelSettingsPanel = ({ modelId }: { modelId: string }) => {
             description={intl.formatMessage(i18n.batchSizeDescription)}
             value={settings.n_batch}
             onChange={(v) => updateField('n_batch', v)}
-            placeholder="Auto"
+            placeholder={intl.formatMessage(i18n.placeholderAuto)}
             min={1}
             allowNull
           />
@@ -687,7 +691,7 @@ export const ModelSettingsPanel = ({ modelId }: { modelId: string }) => {
             description={intl.formatMessage(i18n.gpuLayersDescription)}
             value={settings.n_gpu_layers}
             onChange={(v) => updateField('n_gpu_layers', v)}
-            placeholder="All"
+            placeholder={intl.formatMessage(i18n.placeholderAll)}
             min={0}
             allowNull
           />
@@ -696,7 +700,7 @@ export const ModelSettingsPanel = ({ modelId }: { modelId: string }) => {
             description={intl.formatMessage(i18n.threadsDescription)}
             value={settings.n_threads}
             onChange={(v) => updateField('n_threads', v)}
-            placeholder="Auto"
+            placeholder={intl.formatMessage(i18n.placeholderAuto)}
             min={1}
             allowNull
           />

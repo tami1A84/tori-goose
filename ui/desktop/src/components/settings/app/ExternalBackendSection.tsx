@@ -58,6 +58,7 @@ const i18n = defineMessages({
     defaultMessage:
       'Changes require restarting Goose to take effect. New chat windows will connect to the external server.',
   },
+  noteLabel: { id: 'externalBackendSection.noteLabel', defaultMessage: 'Note:' },
   urlProtocolError: {
     id: 'externalBackendSection.urlProtocolError',
     defaultMessage: 'URL must use http or https protocol',
@@ -222,7 +223,7 @@ export default function ExternalBackendSection() {
 
               <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-md p-3">
                 <p className="text-xs text-amber-800 dark:text-amber-200">
-                  <strong>Note:</strong> {intl.formatMessage(i18n.restartNote)}
+                  <strong>{intl.formatMessage(i18n.noteLabel)}</strong> {intl.formatMessage(i18n.restartNote)}
                 </p>
               </div>
             </>

@@ -11,6 +11,18 @@
   "announcementModal.gotIt": {
     "defaultMessage": "了解しました"
   },
+  "app.failedToImportNostrSession": {
+    "defaultMessage": "Nostr セッションをインポートできませんでした: {error}"
+  },
+  "app.meshNotRunning": {
+    "defaultMessage": "Inference Mesh がプロバイダーに設定されていますが、実行されていません。設定 → Mesh を開いて起動してください。接続を維持するには goose を実行したままにしてください。"
+  },
+  "app.reactReadyFailed": {
+    "defaultMessage": "React の準備完了通知に失敗しました: {error}"
+  },
+  "app.toastNotifications": {
+    "defaultMessage": "トースト通知"
+  },
   "appLayout.openNavigation": {
     "defaultMessage": "ナビゲーションを開く"
   },
@@ -167,6 +179,9 @@
   "chat.notification.taskComplete.title": {
     "defaultMessage": "Gooseがタスクを完了しました。"
   },
+  "chatInput.attachFile": {
+    "defaultMessage": "ファイルを添付"
+  },
   "chatInput.contextWindow": {
     "defaultMessage": "コンテキストウィンドウ"
   },
@@ -176,8 +191,14 @@
   "chatInput.dictationError": {
     "defaultMessage": "音声入力エラー"
   },
+  "chatInput.dictationNotConfiguredSettings": {
+    "defaultMessage": "音声入力が設定されていません（設定）"
+  },
   "chatInput.failedToReadImage": {
     "defaultMessage": "画像ファイルの読み込みに失敗しました"
+  },
+  "chatInput.generateDiagnosticsBundle": {
+    "defaultMessage": "診断バンドルを生成"
   },
   "chatInput.navigationShortcut": {
     "defaultMessage": "{prefix}↑/{prefix}↓でメッセージを移動"
@@ -200,6 +221,9 @@
   "chatInput.send": {
     "defaultMessage": "送信"
   },
+  "chatInput.stop": {
+    "defaultMessage": "停止"
+  },
   "chatInput.tooManyTools": {
     "defaultMessage": "ツールが多すぎるとパフォーマンスが低下する可能性があります。ツール数: {toolCount}（推奨: {recommended}）"
   },
@@ -217,6 +241,12 @@
   },
   "chatInput.viewExtensions": {
     "defaultMessage": "拡張機能を表示"
+  },
+  "chatInput.voiceDictationSubmitHint": {
+    "defaultMessage": " • 送信するには「submit」と言ってください"
+  },
+  "chatInput.voiceDictationTooltip": {
+    "defaultMessage": "音声入力{submitHint}"
   },
   "chatInput.waitingForImages": {
     "defaultMessage": "画像の保存を待機中..."
@@ -908,6 +938,9 @@
   "diagnosticsModal.systemInfoErrorTitle": {
     "defaultMessage": "エラー"
   },
+  "diagnosticsModal.warningLabel": {
+    "defaultMessage": "警告:"
+  },
   "dialog.close": {
     "defaultMessage": "閉じる"
   },
@@ -1231,6 +1264,9 @@
   },
   "externalBackendSection.description": {
     "defaultMessage": "デフォルトでは goose がサーバーを起動します。外部の goose サーバーに接続する場合に使用してください。"
+  },
+  "externalBackendSection.noteLabel": {
+    "defaultMessage": "注:"
   },
   "externalBackendSection.restartNote": {
     "defaultMessage": "変更を有効にするには Goose の再起動が必要です。新しいチャットウィンドウは外部サーバーに接続します。"
@@ -2102,6 +2138,177 @@
   "mentionPopover.scanningFiles": {
     "defaultMessage": "ファイルをスキャン中..."
   },
+  "meshSettings.active": {
+    "defaultMessage": "有効"
+  },
+  "meshSettings.advanced": {
+    "defaultMessage": "詳細設定"
+  },
+  "meshSettings.apiEndpoint": {
+    "defaultMessage": "API エンドポイント"
+  },
+  "meshSettings.autoDiscover": {
+    "defaultMessage": "公開 Mesh を自動検出"
+  },
+  "meshSettings.autoDiscoverDescription": {
+    "defaultMessage": "利用可能な最適な Mesh を自動的に見つけて参加します。"
+  },
+  "meshSettings.availableModels": {
+    "defaultMessage": "利用可能なモデル"
+  },
+  "meshSettings.binary": {
+    "defaultMessage": "バイナリ"
+  },
+  "meshSettings.checkAgain": {
+    "defaultMessage": "再確認"
+  },
+  "meshSettings.checking": {
+    "defaultMessage": "確認中..."
+  },
+  "meshSettings.console": {
+    "defaultMessage": "コンソール"
+  },
+  "meshSettings.contributeGpu": {
+    "defaultMessage": "GPU を提供"
+  },
+  "meshSettings.copied": {
+    "defaultMessage": "コピーしました"
+  },
+  "meshSettings.copy": {
+    "defaultMessage": "コピー"
+  },
+  "meshSettings.description": {
+    "defaultMessage": "分散型 LLM 推論のために、ほかのユーザーと GPU をプールします。API キーもクラウドも不要です。プライベート Mesh を開始する、招待トークンで参加する、または公開 Mesh を探せます。"
+  },
+  "meshSettings.downloadDescription": {
+    "defaultMessage": "最新バージョンを ~/.mesh-llm/ に取得しています。通常はすぐに完了します。"
+  },
+  "meshSettings.downloadTitle": {
+    "defaultMessage": "最新の mesh-llm をダウンロード中..."
+  },
+  "meshSettings.downloadingStatus": {
+    "defaultMessage": "最新の mesh-llm をダウンロード中（約19 MB）..."
+  },
+  "meshSettings.experimental": {
+    "defaultMessage": "試験的機能です。"
+  },
+  "meshSettings.failedToActivateModel": {
+    "defaultMessage": "モデルを有効化できませんでした: {error}"
+  },
+  "meshSettings.failedToStart": {
+    "defaultMessage": "起動できませんでした: {error}"
+  },
+  "meshSettings.failedToStartMesh": {
+    "defaultMessage": "mesh-llm を起動できませんでした"
+  },
+  "meshSettings.failedToStopMesh": {
+    "defaultMessage": "mesh-llm を停止できませんでした"
+  },
+  "meshSettings.getStarted": {
+    "defaultMessage": "はじめる"
+  },
+  "meshSettings.inferenceMesh": {
+    "defaultMessage": "Inference Mesh"
+  },
+  "meshSettings.installDescription": {
+    "defaultMessage": "mesh-llm がインストールされていません。インストールガイドに従ってセットアップするか、このマシンで既に実行中の Mesh に接続してください。"
+  },
+  "meshSettings.installGuide": {
+    "defaultMessage": "インストールガイド"
+  },
+  "meshSettings.inviteToken": {
+    "defaultMessage": "招待トークン"
+  },
+  "meshSettings.inviteTokenPlaceholder": {
+    "defaultMessage": "招待トークンをここに貼り付け"
+  },
+  "meshSettings.inviteTokenRequired": {
+    "defaultMessage": "Mesh に参加するには招待トークンを貼り付けてください"
+  },
+  "meshSettings.joinWithInviteToken": {
+    "defaultMessage": "招待トークンで参加"
+  },
+  "meshSettings.joinWithInviteTokenDescription": {
+    "defaultMessage": "共有されたプライベート Mesh に参加します。"
+  },
+  "meshSettings.keepGooseRunning": {
+    "defaultMessage": "Mesh を開始したら、接続を維持するために goose を実行したままにしてください。"
+  },
+  "meshSettings.keepGooseRunningConnected": {
+    "defaultMessage": "Mesh への接続を維持するには goose を実行したままにしてください。"
+  },
+  "meshSettings.learnMore": {
+    "defaultMessage": "詳細を見る"
+  },
+  "meshSettings.live": {
+    "defaultMessage": "稼働中"
+  },
+  "meshSettings.meshReadyTimeout": {
+    "defaultMessage": "mesh-llm の準備が完了しませんでした。~/.mesh-llm/mesh-llm.log を確認してください"
+  },
+  "meshSettings.modelDownloadHint": {
+    "defaultMessage": "キャッシュされていない場合は自動的にダウンロードされます。大きなモデルほど多くの VRAM が必要です。"
+  },
+  "meshSettings.modelToServe": {
+    "defaultMessage": "提供するモデル"
+  },
+  "meshSettings.noModels": {
+    "defaultMessage": "Mesh は実行中ですが、利用可能なモデルはまだありません。モデルを読み込み中の可能性があります。"
+  },
+  "meshSettings.notInstalledStatus": {
+    "defaultMessage": "mesh-llm がインストールされていません"
+  },
+  "meshSettings.notRunning": {
+    "defaultMessage": "実行されていません"
+  },
+  "meshSettings.openConsole": {
+    "defaultMessage": "コンソールを開く"
+  },
+  "meshSettings.peerCount": {
+    "defaultMessage": "{peerCount, plural, one {# ピア} other {# ピア}}"
+  },
+  "meshSettings.publicMeshWarning": {
+    "defaultMessage": "公開 Mesh はボランティアによって運用されています。プロンプトは相手のハードウェアに送信されるため、プライバシーは保証されません。"
+  },
+  "meshSettings.refresh": {
+    "defaultMessage": "更新"
+  },
+  "meshSettings.runningStatus": {
+    "defaultMessage": "実行中 — {modelCount, plural, one {# 個のモデル} other {# 個のモデル}} が利用可能"
+  },
+  "meshSettings.selectModel": {
+    "defaultMessage": "Goose プロバイダーとして使用するモデルを選択してください。"
+  },
+  "meshSettings.serveModelsForOthers": {
+    "defaultMessage": "（ほかのユーザー向けにもモデルを提供）"
+  },
+  "meshSettings.shareTokenDescription": {
+    "defaultMessage": "ほかのユーザーがあなたの Mesh に参加できるよう、このトークンを共有してください。"
+  },
+  "meshSettings.startMesh": {
+    "defaultMessage": "Mesh を開始"
+  },
+  "meshSettings.startNewPrivateMesh": {
+    "defaultMessage": "新しいプライベート Mesh を開始"
+  },
+  "meshSettings.startNewPrivateMeshDescription": {
+    "defaultMessage": "自分の Mesh を作成します。GPU をプールするには招待トークンを共有してください。"
+  },
+  "meshSettings.startingDescription": {
+    "defaultMessage": "Mesh に接続し、モデルを読み込んでいます。初回実行時は数分かかる場合があります。"
+  },
+  "meshSettings.startingStatus": {
+    "defaultMessage": "起動中 — モデルをダウンロードする場合は数分かかることがあります..."
+  },
+  "meshSettings.startingTitle": {
+    "defaultMessage": "mesh-llm を起動中..."
+  },
+  "meshSettings.stopMesh": {
+    "defaultMessage": "Mesh を停止"
+  },
+  "meshSettings.use": {
+    "defaultMessage": "使用"
+  },
   "messageCopyLink.copied": {
     "defaultMessage": "コピーしました！"
   },
@@ -2329,6 +2536,18 @@
   },
   "modelSettingsPanel.performance": {
     "defaultMessage": "パフォーマンス"
+  },
+  "modelSettingsPanel.placeholderAll": {
+    "defaultMessage": "すべて"
+  },
+  "modelSettingsPanel.placeholderAuto": {
+    "defaultMessage": "自動"
+  },
+  "modelSettingsPanel.placeholderNoLimit": {
+    "defaultMessage": "制限なし"
+  },
+  "modelSettingsPanel.placeholderRandom": {
+    "defaultMessage": "ランダム"
   },
   "modelSettingsPanel.presencePenalty": {
     "defaultMessage": "存在ペナルティ"
@@ -3329,6 +3548,9 @@
   "recipesView.yamlFiles": {
     "defaultMessage": "YAMLファイル"
   },
+  "renderer.failedToStartGooseBackend": {
+    "defaultMessage": "goose バックエンドプロセスを起動できませんでした"
+  },
   "resetProviderSection.resetButton": {
     "defaultMessage": "プロバイダーとモデルをリセット"
   },
@@ -3511,6 +3733,9 @@
   },
   "scheduleModal.cancel": {
     "defaultMessage": "キャンセル"
+  },
+  "scheduleModal.clockIconAlt": {
+    "defaultMessage": "時計"
   },
   "scheduleModal.createNewSchedule": {
     "defaultMessage": "新しいスケジュールを作成"
@@ -3974,6 +4199,9 @@
   "sessions.toast.copied": {
     "defaultMessage": "クリップボードにコピーしました"
   },
+  "sessions.toast.copyFailed": {
+    "defaultMessage": "コピーできませんでした: {error}"
+  },
   "sessions.toast.deleteFailed": {
     "defaultMessage": "セッション「{name}」を削除できませんでした: {error}"
   },
@@ -4120,6 +4348,9 @@
   },
   "settings.updates.title": {
     "defaultMessage": "アップデート"
+  },
+  "settings.version.blockLogoAlt": {
+    "defaultMessage": "Block ロゴ"
   },
   "settings.version.title": {
     "defaultMessage": "バージョン"
@@ -4328,6 +4559,9 @@
   "subRecipeModal.subtitle": {
     "defaultMessage": "レシピ実行中にツールとして呼び出せるサブレシピを設定します"
   },
+  "suspenseLoader.loading": {
+    "defaultMessage": "読み込み中..."
+  },
   "switchModelModal.backToModelList": {
     "defaultMessage": "モデル一覧に戻る"
   },
@@ -4501,6 +4735,15 @@
   },
   "themeSelector.theme": {
     "defaultMessage": "テーマ"
+  },
+  "thinkingContent.thinking": {
+    "defaultMessage": "思考中"
+  },
+  "toastError.askGoose": {
+    "defaultMessage": "goose に聞く"
+  },
+  "toastError.copyError": {
+    "defaultMessage": "エラーをコピー"
   },
   "toolApprovalButtons.allowOnce": {
     "defaultMessage": "1回のみ許可"

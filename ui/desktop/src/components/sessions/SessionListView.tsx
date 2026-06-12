@@ -89,6 +89,7 @@ const i18n = defineMessages({
   shareNostrSuccess: { id: 'sessions.toast.shareNostr', defaultMessage: 'Encrypted Nostr share link created' },
   shareNostrFailed: { id: 'sessions.toast.shareNostrFailed', defaultMessage: 'Failed to create Nostr share link: {error}' },
   copied: { id: 'sessions.toast.copied', defaultMessage: 'Copied to clipboard' },
+  copyFailed: { id: 'sessions.toast.copyFailed', defaultMessage: 'Failed to copy: {error}' },
   openInNewWindow: { id: 'sessions.action.openNewWindow', defaultMessage: 'Open in new window' },
   editSessionName: { id: 'sessions.action.editName', defaultMessage: 'Edit session name' },
   duplicateSession: { id: 'sessions.action.duplicate', defaultMessage: 'Duplicate session' },
@@ -677,7 +678,7 @@ const SessionListView: React.FC<SessionListViewProps> = React.memo(
         await navigator.clipboard.writeText(shareLink);
         toast.success(intl.formatMessage(i18n.copied));
       } catch (error) {
-        toast.error(`Failed to copy: ${errorMessage(error, 'Unknown error')}`);
+        toast.error(intl.formatMessage(i18n.copyFailed, { error: errorMessage(error, 'Unknown error') }));
       }
     }, [intl, shareLink]);
 

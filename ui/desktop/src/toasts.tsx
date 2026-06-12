@@ -9,6 +9,12 @@ import {
   ExtensionLoadingStatus,
 } from './components/GroupedExtensionLoadingToast';
 import { getInitialWorkingDir } from './utils/workingDir';
+import { defineMessages, useIntl } from './i18n';
+
+const i18n = defineMessages({
+  askGoose: { id: 'toastError.askGoose', defaultMessage: 'Ask goose' },
+  copyError: { id: 'toastError.copyError', defaultMessage: 'Copy error' },
+});
 
 export interface ToastServiceOptions {
   silent?: boolean;
@@ -176,6 +182,7 @@ function ToastErrorContent({
   traceback,
   recoverHints,
 }: Omit<ToastErrorProps, 'setView'>) {
+  const intl = useIntl();
   const setView = useNavigation();
   const showRecovery = recoverHints && setView;
   const hasBoth = traceback && showRecovery;
@@ -199,22 +206,24 @@ function ToastErrorContent({
       <div className="flex-none flex items-center gap-2">
         {showRecovery && (
           <Button onClick={() => startNewSession(recoverHints, setView, getInitialWorkingDir())}>
-            Ask goose
+            {intl.formatMessage(i18n.askGoose)}
           </Button>
         )}
         {hasBoth && (
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button onClick={handleCopyError} shape="round" aria-label="Copy error">
+              <Button onClick={handleCopyError} shape="round" aria-label={intl.formatMessage(i18n.copyError)}>
                 <Copy className="h-4 w-4" />
               </Button>
             </TooltipTrigger>
             <TooltipContent side="bottom" className="z-[10000]">
-              Copy error
+              {intl.formatMessage(i18n.copyError)}
             </TooltipContent>
           </Tooltip>
         )}
-        {traceback && !hasBoth && <Button onClick={handleCopyError}>Copy error</Button>}
+        {traceback && !hasBoth && (
+          <Button onClick={handleCopyError}>{intl.formatMessage(i18n.copyError)}</Button>
+        )}
       </div>
     </div>
   );

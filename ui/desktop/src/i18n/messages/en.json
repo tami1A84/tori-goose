@@ -11,6 +11,18 @@
   "announcementModal.gotIt": {
     "defaultMessage": "Got it!"
   },
+  "app.failedToImportNostrSession": {
+    "defaultMessage": "Failed to import Nostr session: {error}"
+  },
+  "app.meshNotRunning": {
+    "defaultMessage": "Inference Mesh is set as your provider but isn't running. Open Settings → Mesh to start it. Keep goose running to stay connected."
+  },
+  "app.reactReadyFailed": {
+    "defaultMessage": "React ready notification failed: {error}"
+  },
+  "app.toastNotifications": {
+    "defaultMessage": "Toast notifications"
+  },
   "appLayout.openNavigation": {
     "defaultMessage": "Open navigation"
   },
@@ -167,6 +179,9 @@
   "chat.notification.taskComplete.title": {
     "defaultMessage": "Goose finished the task."
   },
+  "chatInput.attachFile": {
+    "defaultMessage": "Attach file"
+  },
   "chatInput.contextWindow": {
     "defaultMessage": "Context window"
   },
@@ -176,8 +191,14 @@
   "chatInput.dictationError": {
     "defaultMessage": "Dictation Error"
   },
+  "chatInput.dictationNotConfiguredSettings": {
+    "defaultMessage": "Dictation not configured (Settings)"
+  },
   "chatInput.failedToReadImage": {
     "defaultMessage": "Failed to read image file"
+  },
+  "chatInput.generateDiagnosticsBundle": {
+    "defaultMessage": "Generate diagnostics bundle"
   },
   "chatInput.navigationShortcut": {
     "defaultMessage": "{prefix}↑/{prefix}↓ to navigate messages"
@@ -200,6 +221,9 @@
   "chatInput.send": {
     "defaultMessage": "Send"
   },
+  "chatInput.stop": {
+    "defaultMessage": "Stop"
+  },
   "chatInput.tooManyTools": {
     "defaultMessage": "Too many tools can degrade performance. Tool count: {toolCount} (recommend: {recommended})"
   },
@@ -217,6 +241,12 @@
   },
   "chatInput.viewExtensions": {
     "defaultMessage": "View extensions"
+  },
+  "chatInput.voiceDictationSubmitHint": {
+    "defaultMessage": " • Say \"submit\" to send"
+  },
+  "chatInput.voiceDictationTooltip": {
+    "defaultMessage": "Voice dictation{submitHint}"
   },
   "chatInput.waitingForImages": {
     "defaultMessage": "Waiting for images to save..."
@@ -908,6 +938,9 @@
   "diagnosticsModal.systemInfoErrorTitle": {
     "defaultMessage": "Error"
   },
+  "diagnosticsModal.warningLabel": {
+    "defaultMessage": "Warning:"
+  },
   "dialog.close": {
     "defaultMessage": "Close"
   },
@@ -1231,6 +1264,9 @@
   },
   "externalBackendSection.description": {
     "defaultMessage": "By default goose launches a server for you, use this to connect to an external goose server"
+  },
+  "externalBackendSection.noteLabel": {
+    "defaultMessage": "Note:"
   },
   "externalBackendSection.restartNote": {
     "defaultMessage": "Changes require restarting Goose to take effect. New chat windows will connect to the external server."
@@ -2102,6 +2138,177 @@
   "mentionPopover.scanningFiles": {
     "defaultMessage": "Scanning files..."
   },
+  "meshSettings.active": {
+    "defaultMessage": "Active"
+  },
+  "meshSettings.advanced": {
+    "defaultMessage": "Advanced"
+  },
+  "meshSettings.apiEndpoint": {
+    "defaultMessage": "API endpoint"
+  },
+  "meshSettings.autoDiscover": {
+    "defaultMessage": "Auto-discover a public mesh"
+  },
+  "meshSettings.autoDiscoverDescription": {
+    "defaultMessage": "Find and join the best available mesh automatically."
+  },
+  "meshSettings.availableModels": {
+    "defaultMessage": "Available Models"
+  },
+  "meshSettings.binary": {
+    "defaultMessage": "Binary"
+  },
+  "meshSettings.checkAgain": {
+    "defaultMessage": "Check Again"
+  },
+  "meshSettings.checking": {
+    "defaultMessage": "Checking..."
+  },
+  "meshSettings.console": {
+    "defaultMessage": "Console"
+  },
+  "meshSettings.contributeGpu": {
+    "defaultMessage": "Contribute GPU"
+  },
+  "meshSettings.copied": {
+    "defaultMessage": "Copied"
+  },
+  "meshSettings.copy": {
+    "defaultMessage": "Copy"
+  },
+  "meshSettings.description": {
+    "defaultMessage": "Pool GPUs with others for decentralized LLM inference — no API keys, no cloud. Start a private mesh, join one with an invite token, or discover public meshes."
+  },
+  "meshSettings.downloadDescription": {
+    "defaultMessage": "Fetching the latest version to ~/.mesh-llm/. This should only take a moment."
+  },
+  "meshSettings.downloadTitle": {
+    "defaultMessage": "Downloading latest mesh-llm..."
+  },
+  "meshSettings.downloadingStatus": {
+    "defaultMessage": "Downloading latest mesh-llm (~19 MB)..."
+  },
+  "meshSettings.experimental": {
+    "defaultMessage": "Experimental."
+  },
+  "meshSettings.failedToActivateModel": {
+    "defaultMessage": "Failed to activate model: {error}"
+  },
+  "meshSettings.failedToStart": {
+    "defaultMessage": "Failed to start: {error}"
+  },
+  "meshSettings.failedToStartMesh": {
+    "defaultMessage": "Failed to start mesh-llm"
+  },
+  "meshSettings.failedToStopMesh": {
+    "defaultMessage": "Failed to stop mesh-llm"
+  },
+  "meshSettings.getStarted": {
+    "defaultMessage": "Get started"
+  },
+  "meshSettings.inferenceMesh": {
+    "defaultMessage": "Inference Mesh"
+  },
+  "meshSettings.installDescription": {
+    "defaultMessage": "mesh-llm is not installed. Follow the install guide to set it up, or connect to a mesh already running on this machine."
+  },
+  "meshSettings.installGuide": {
+    "defaultMessage": "Install guide"
+  },
+  "meshSettings.inviteToken": {
+    "defaultMessage": "Invite token"
+  },
+  "meshSettings.inviteTokenPlaceholder": {
+    "defaultMessage": "Paste invite token here"
+  },
+  "meshSettings.inviteTokenRequired": {
+    "defaultMessage": "Paste an invite token to join a mesh"
+  },
+  "meshSettings.joinWithInviteToken": {
+    "defaultMessage": "Join with invite token"
+  },
+  "meshSettings.joinWithInviteTokenDescription": {
+    "defaultMessage": "Join a private mesh someone shared with you."
+  },
+  "meshSettings.keepGooseRunning": {
+    "defaultMessage": "When you start the mesh, keep goose running to stay connected."
+  },
+  "meshSettings.keepGooseRunningConnected": {
+    "defaultMessage": "Keep goose running to stay connected to the mesh."
+  },
+  "meshSettings.learnMore": {
+    "defaultMessage": "Learn more"
+  },
+  "meshSettings.live": {
+    "defaultMessage": "live"
+  },
+  "meshSettings.meshReadyTimeout": {
+    "defaultMessage": "mesh-llm did not become ready. Check ~/.mesh-llm/mesh-llm.log"
+  },
+  "meshSettings.modelDownloadHint": {
+    "defaultMessage": "Downloads automatically if not already cached. Larger models need more VRAM."
+  },
+  "meshSettings.modelToServe": {
+    "defaultMessage": "Model to serve"
+  },
+  "meshSettings.noModels": {
+    "defaultMessage": "Mesh is running but no models are available yet. A model may still be loading."
+  },
+  "meshSettings.notInstalledStatus": {
+    "defaultMessage": "mesh-llm not installed"
+  },
+  "meshSettings.notRunning": {
+    "defaultMessage": "Not running"
+  },
+  "meshSettings.openConsole": {
+    "defaultMessage": "Open Console"
+  },
+  "meshSettings.peerCount": {
+    "defaultMessage": "{peerCount, plural, one {# peer} other {# peers}}"
+  },
+  "meshSettings.publicMeshWarning": {
+    "defaultMessage": "Public meshes are run by volunteers. Your prompts are sent to their hardware — no privacy guarantees."
+  },
+  "meshSettings.refresh": {
+    "defaultMessage": "Refresh"
+  },
+  "meshSettings.runningStatus": {
+    "defaultMessage": "Running — {modelCount, plural, one {# model} other {# models}} available"
+  },
+  "meshSettings.selectModel": {
+    "defaultMessage": "Select a model to use it as your Goose provider."
+  },
+  "meshSettings.serveModelsForOthers": {
+    "defaultMessage": "(serve models for others too)"
+  },
+  "meshSettings.shareTokenDescription": {
+    "defaultMessage": "Share this with others so they can join your mesh."
+  },
+  "meshSettings.startMesh": {
+    "defaultMessage": "Start Mesh"
+  },
+  "meshSettings.startNewPrivateMesh": {
+    "defaultMessage": "Start a new private mesh"
+  },
+  "meshSettings.startNewPrivateMeshDescription": {
+    "defaultMessage": "Create your own mesh. Share the invite token with others to pool GPUs."
+  },
+  "meshSettings.startingDescription": {
+    "defaultMessage": "Connecting to the mesh and loading models. This may take a minute on first run."
+  },
+  "meshSettings.startingStatus": {
+    "defaultMessage": "Starting — this may take a minute if downloading a model..."
+  },
+  "meshSettings.startingTitle": {
+    "defaultMessage": "Starting mesh-llm..."
+  },
+  "meshSettings.stopMesh": {
+    "defaultMessage": "Stop Mesh"
+  },
+  "meshSettings.use": {
+    "defaultMessage": "Use"
+  },
   "messageCopyLink.copied": {
     "defaultMessage": "Copied!"
   },
@@ -2329,6 +2536,18 @@
   },
   "modelSettingsPanel.performance": {
     "defaultMessage": "Performance"
+  },
+  "modelSettingsPanel.placeholderAll": {
+    "defaultMessage": "All"
+  },
+  "modelSettingsPanel.placeholderAuto": {
+    "defaultMessage": "Auto"
+  },
+  "modelSettingsPanel.placeholderNoLimit": {
+    "defaultMessage": "No limit"
+  },
+  "modelSettingsPanel.placeholderRandom": {
+    "defaultMessage": "Random"
   },
   "modelSettingsPanel.presencePenalty": {
     "defaultMessage": "Presence penalty"
@@ -3329,6 +3548,9 @@
   "recipesView.yamlFiles": {
     "defaultMessage": "YAML Files"
   },
+  "renderer.failedToStartGooseBackend": {
+    "defaultMessage": "Failed to start goose backend process"
+  },
   "resetProviderSection.resetButton": {
     "defaultMessage": "Reset Provider and Model"
   },
@@ -3511,6 +3733,9 @@
   },
   "scheduleModal.cancel": {
     "defaultMessage": "Cancel"
+  },
+  "scheduleModal.clockIconAlt": {
+    "defaultMessage": "Clock"
   },
   "scheduleModal.createNewSchedule": {
     "defaultMessage": "Create New Schedule"
@@ -3974,6 +4199,9 @@
   "sessions.toast.copied": {
     "defaultMessage": "Copied to clipboard"
   },
+  "sessions.toast.copyFailed": {
+    "defaultMessage": "Failed to copy: {error}"
+  },
   "sessions.toast.deleteFailed": {
     "defaultMessage": "Failed to delete session \"{name}\": {error}"
   },
@@ -4120,6 +4348,9 @@
   },
   "settings.updates.title": {
     "defaultMessage": "Updates"
+  },
+  "settings.version.blockLogoAlt": {
+    "defaultMessage": "Block Logo"
   },
   "settings.version.title": {
     "defaultMessage": "Version"
@@ -4328,6 +4559,9 @@
   "subRecipeModal.subtitle": {
     "defaultMessage": "Configure a subrecipe that can be called as a tool during recipe execution"
   },
+  "suspenseLoader.loading": {
+    "defaultMessage": "Loading..."
+  },
   "switchModelModal.backToModelList": {
     "defaultMessage": "Back to model list"
   },
@@ -4501,6 +4735,15 @@
   },
   "themeSelector.theme": {
     "defaultMessage": "Theme"
+  },
+  "thinkingContent.thinking": {
+    "defaultMessage": "Thinking"
+  },
+  "toastError.askGoose": {
+    "defaultMessage": "Ask goose"
+  },
+  "toastError.copyError": {
+    "defaultMessage": "Copy error"
   },
   "toolApprovalButtons.allowOnce": {
     "defaultMessage": "Allow Once"

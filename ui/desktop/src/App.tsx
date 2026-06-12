@@ -56,6 +56,27 @@ import { usePageViewTracking } from './hooks/useAnalytics';
 import { trackErrorWithContext } from './utils/analytics';
 import { AppEvents } from './constants/events';
 import { registerPlatformEventHandlers } from './utils/platform_events';
+import { defineMessages, useIntl } from './i18n';
+
+const i18n = defineMessages({
+  reactReadyFailed: {
+    id: 'app.reactReadyFailed',
+    defaultMessage: 'React ready notification failed: {error}',
+  },
+  failedToImportNostrSession: {
+    id: 'app.failedToImportNostrSession',
+    defaultMessage: 'Failed to import Nostr session: {error}',
+  },
+  meshNotRunning: {
+    id: 'app.meshNotRunning',
+    defaultMessage:
+      "Inference Mesh is set as your provider but isn't running. Open Settings → Mesh to start it. Keep goose running to stay connected.",
+  },
+  toastNotifications: {
+    id: 'app.toastNotifications',
+    defaultMessage: 'Toast notifications',
+  },
+});
 
 function PageViewTracker() {
   usePageViewTracking();
@@ -341,6 +362,7 @@ const ExtensionsRoute = () => {
 };
 
 export function AppInner() {
+  const intl = useIntl();
   const [fatalError, setFatalError] = useState<string | null>(null);
   const [isLoadingSharedSession, setIsLoadingSharedSession] = useState(false);
   const [sharedSessionError, setSharedSessionError] = useState<string | null>(null);
@@ -417,9 +439,13 @@ export function AppInner() {
       window.electron.reactReady();
     } catch (error) {
       console.error('Error sending reactReady:', error);
-      setFatalError(`React ready notification failed: ${errorMessage(error, 'Unknown error')}`);
+      setFatalError(
+        intl.formatMessage(i18n.reactReadyFailed, {
+          error: errorMessage(error, 'Unknown error'),
+        })
+      );
     }
-  }, []);
+  }, [intl]);
 
   useEffect(() => {
     const handleOpenSharedSession = async (_event: IpcRendererEvent, ...args: unknown[]) => {
@@ -444,7 +470,11 @@ export function AppInner() {
           recoverable: true,
         });
         if (link.startsWith('goose://sessions/nostr')) {
-          toast.error(`Failed to import Nostr session: ${errorMessage(error, 'Unknown error')}`);
+          toast.error(
+            intl.formatMessage(i18n.failedToImportNostrSession, {
+              error: errorMessage(error, 'Unknown error'),
+            })
+          );
           navigate('/sessions');
         } else {
           const shareToken = link.replace('goose://sessions/', '');
@@ -463,7 +493,7 @@ export function AppInner() {
     return () => {
       window.electron.off('open-shared-session', handleOpenSharedSession);
     };
-  }, [navigate]);
+  }, [navigate, intl]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -486,14 +516,14 @@ export function AppInner() {
   // Show a toast if mesh is the configured provider but isn't running.
   useEffect(() => {
     const handler = () => {
-      toast.warn('Inference Mesh is set as your provider but isn\'t running. Open Settings → Mesh to start it. Keep goose running to stay connected.', {
+      toast.warn(intl.formatMessage(i18n.meshNotRunning), {
         autoClose: false,
         toastId: 'mesh-not-running',
       });
     };
     window.electron.on('mesh-not-running', handler);
     return () => { window.electron.off('mesh-not-running', handler); };
-  }, []);
+  }, [intl]);
 
   // Prevent default drag and drop behavior globally to avoid opening files in new windows
   // but allow our React components to handle drops in designated areas
@@ -628,7 +658,7 @@ export function AppInner() {
     <>
       <PageViewTracker />
       <ToastContainer
-        aria-label="Toast notifications"
+        aria-label={intl.formatMessage(i18n.toastNotifications)}
         toastClassName={() =>
           `relative min-h-16 mb-4 p-2 rounded-lg
                flex justify-between overflow-hidden cursor-pointer
