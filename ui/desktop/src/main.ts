@@ -64,7 +64,7 @@ function shouldSetupUpdater(): boolean {
 // -----------------------------------------------------------------------
 // Electron's main process can't use react-intl (which runs in the renderer),
 // so the native menu bar is translated here with a small hand-maintained
-// dictionary. Only Simplified Chinese is filled in right now; other locales
+// dictionary. Simplified Chinese and Japanese are filled in right now; other locales
 // fall through to the original English labels. Keep the keys in sync with
 // the raw label strings used below.
 // =======================================================================
@@ -129,6 +129,80 @@ const MENU_TRANSLATIONS_ZH_CN: Record<string, string> = {
   Services: '服务',
 };
 
+const MENU_TRANSLATIONS_JA: Record<string, string> = {
+  // Top-level
+  File: 'ファイル',
+  Edit: '編集',
+  View: '表示',
+  Window: 'ウィンドウ',
+  Help: 'ヘルプ',
+  // Context menu
+  'Add to dictionary': '辞書に追加',
+  Cut: '切り取り',
+  Copy: 'コピー',
+  Paste: '貼り付け',
+  // Goose-added items
+  'New Window': '新規ウィンドウ',
+  Settings: '設定',
+  'Find…': '検索…',
+  'Find Next': '次を検索',
+  'Find Previous': '前を検索',
+  'Use Selection for Find': '選択範囲で検索',
+  Find: '検索',
+  'New Chat': '新しいチャット',
+  'New Chat Window': '新しいチャットウィンドウ',
+  'Open Directory...': 'ディレクトリを開く...',
+  'Recent Directories': '最近使ったディレクトリ',
+  'Focus Goose Window': 'Goose ウィンドウを前面に表示',
+  'Quick Launcher': 'クイックランチャー',
+  'Always on Top': '常に手前に表示',
+  'Toggle Navigation': 'ナビゲーションを切り替え',
+  'About Goose': 'Goose について',
+  Version: 'バージョン',
+  // Electron role-based labels
+  Undo: '取り消す',
+  Redo: 'やり直す',
+  'Select All': 'すべて選択',
+  Delete: '削除',
+  Speech: '音声入力',
+  Reload: '再読み込み',
+  'Force Reload': '強制再読み込み',
+  'Toggle Developer Tools': '開発者ツールを切り替え',
+  'Actual Size': '実際のサイズ',
+  'Reset Zoom': 'ズームをリセット',
+  'Zoom In': '拡大',
+  'Zoom Out': '縮小',
+  'Toggle Full Screen': 'フルスクリーンを切り替え',
+  'Toggle Fullscreen': 'フルスクリーンを切り替え',
+  Minimize: '最小化',
+  Close: '閉じる',
+  'Close Window': 'ウィンドウを閉じる',
+  Quit: '終了',
+  Exit: '終了',
+  'Bring All to Front': 'すべてを前面に移動',
+  'Emoji & Symbols': '絵文字と記号',
+  'Start Dictation…': '音声入力を開始…',
+  'Hide Goose': 'Goose を隠す',
+  'Hide Others': 'ほかを隠す',
+  'Show All': 'すべて表示',
+  Services: 'サービス',
+  OK: 'OK',
+  // Native notifications/dialogs
+  'Could not open directory:': 'ディレクトリを開けませんでした:',
+  'External Backend Unreachable': '外部バックエンドに接続できません',
+  'Could not connect to external backend at': '外部バックエンドに接続できませんでした:',
+  'The external goosed server may not be running.': '外部 goosed サーバーが実行されていない可能性があります。',
+  'Disable External Backend & Retry': '外部バックエンドを無効にして再試行',
+  'Goose Failed to Start': 'Goose の起動に失敗しました',
+  'The backend server failed to start.': 'バックエンドサーバーを起動できませんでした。',
+  'Import session': 'セッションをインポート',
+  'Session files': 'セッションファイル',
+  'All files': 'すべてのファイル',
+  'Goose Error': 'Goose エラー',
+  'Failed to create main window:': 'メインウィンドウを作成できませんでした:',
+};
+
+
 function detectMenuLocale(): string {
   const explicit = process.env.GOOSE_LOCALE;
   if (explicit) return explicit;
@@ -146,6 +220,9 @@ function menuT(label: string): string {
   const isSimplifiedChinese = !isTraditional && (lower === 'zh' || lower.startsWith('zh-'));
   if (isSimplifiedChinese) {
     return MENU_TRANSLATIONS_ZH_CN[label] ?? label;
+  }
+  if (lower === 'ja' || lower.startsWith('ja-')) {
+    return MENU_TRANSLATIONS_JA[label] ?? label;
   }
   return label;
 }
@@ -668,7 +745,7 @@ async function handleFileOpen(filePath: string) {
     // Show user-friendly error notification
     new Notification({
       title: 'Goose',
-      body: `Could not open directory: ${path.basename(filePath)}`,
+      body: `${menuT('Could not open directory:')} ${path.basename(filePath)}`,
     }).show();
   }
 }
@@ -956,10 +1033,10 @@ const createChat = async (app: App, options: CreateChatOptions = {}) => {
     if (isUsingExternalBackend) {
       const response = dialog.showMessageBoxSync({
         type: 'error',
-        title: 'External Backend Unreachable',
-        message: `Could not connect to external backend at ${settings.externalGoosed?.url}`,
-        detail: 'The external goosed server may not be running.',
-        buttons: ['Disable External Backend & Retry', 'Quit'],
+        title: menuT('External Backend Unreachable'),
+        message: `${menuT('Could not connect to external backend at')} ${settings.externalGoosed?.url}`,
+        detail: menuT('The external goosed server may not be running.'),
+        buttons: [menuT('Disable External Backend & Retry'), menuT('Quit')],
         defaultId: 0,
         cancelId: 1,
       });
@@ -976,10 +1053,10 @@ const createChat = async (app: App, options: CreateChatOptions = {}) => {
     } else {
       dialog.showMessageBoxSync({
         type: 'error',
-        title: 'Goose Failed to Start',
-        message: 'The backend server failed to start.',
+        title: menuT('Goose Failed to Start'),
+        message: menuT('The backend server failed to start.'),
         detail: failureDetailParts.join('\n\n'),
-        buttons: ['OK'],
+        buttons: [menuT('OK')],
       });
     }
     app.quit();
@@ -1888,12 +1965,12 @@ ipcMain.handle('select-file-or-directory', async (_event, defaultPath?: string) 
 // need a separate read step.
 ipcMain.handle('select-import-session-file', async () => {
   const result = (await dialog.showOpenDialog({
-    title: 'Import session',
+    title: menuT('Import session'),
     defaultPath: os.homedir(),
     properties: ['openFile', 'showHiddenFiles'],
     filters: [
-      { name: 'Session files', extensions: ['json', 'jsonl'] },
-      { name: 'All files', extensions: ['*'] },
+      { name: menuT('Session files'), extensions: ['json', 'jsonl'] },
+      { name: menuT('All files'), extensions: ['*'] },
     ],
   })) as unknown as OpenDialogReturnValue;
 
@@ -2447,7 +2524,7 @@ async function appMain() {
       if (aboutGooseMenuItem.submenu) {
         aboutGooseMenuItem.submenu.append(
           new MenuItem({
-            label: `Version ${version || app.getVersion()}`,
+            label: `${menuT('Version')} ${version || app.getVersion()}`,
             enabled: false,
           })
         );
@@ -2753,7 +2830,7 @@ app.whenReady().then(async () => {
   try {
     await appMain();
   } catch (error) {
-    dialog.showErrorBox('Goose Error', `Failed to create main window: ${error}`);
+    dialog.showErrorBox(menuT('Goose Error'), `${menuT('Failed to create main window:')} ${error}`);
     app.quit();
   }
 });
