@@ -73,6 +73,18 @@ describe('getLocale', () => {
     expect(getLocale()).toEqual({ locale: 'tr', messageLocale: 'tr' });
   });
 
+
+  it('supports Japanese from navigator.languages', () => {
+    vi.stubGlobal('navigator', { languages: ['ja-JP'] });
+    expect(getLocale()).toEqual({ locale: 'ja-JP', messageLocale: 'ja' });
+  });
+
+  it('supports POSIX-style Japanese locale from GOOSE_LOCALE', () => {
+    mockAppConfig({ GOOSE_LOCALE: 'ja_JP' });
+    vi.stubGlobal('navigator', { languages: ['xx-XX'] });
+    expect(getLocale()).toEqual({ locale: 'ja-JP', messageLocale: 'ja' });
+  });
+
   it('falls back to base language when locale tag is invalid BCP 47', () => {
     // "en-" is not a valid BCP 47 tag and would cause RangeError in Intl APIs
     mockAppConfig({ GOOSE_LOCALE: 'en-' });
