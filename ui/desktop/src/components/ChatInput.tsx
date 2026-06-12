@@ -117,6 +117,24 @@ const i18n = defineMessages({
     id: 'chatInput.unknownType',
     defaultMessage: 'Unknown type',
   },
+  generateDiagnosticsBundle: {
+    id: 'chatInput.generateDiagnosticsBundle',
+    defaultMessage: 'Generate diagnostics bundle',
+  },
+  attachFile: { id: 'chatInput.attachFile', defaultMessage: 'Attach file' },
+  dictationNotConfiguredSettings: {
+    id: 'chatInput.dictationNotConfiguredSettings',
+    defaultMessage: 'Dictation not configured (Settings)',
+  },
+  stop: { id: 'chatInput.stop', defaultMessage: 'Stop' },
+  voiceDictationTooltip: {
+    id: 'chatInput.voiceDictationTooltip',
+    defaultMessage: 'Voice dictation{submitHint}',
+  },
+  voiceDictationSubmitHint: {
+    id: 'chatInput.voiceDictationSubmitHint',
+    defaultMessage: ' • Say "submit" to send',
+  },
   contextWindow: {
     id: 'chatInput.contextWindow',
     defaultMessage: 'Context window',
@@ -1669,7 +1687,7 @@ export default function ChatInput({
                     <Bug className="w-4 h-4" />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>Generate diagnostics bundle</TooltipContent>
+                <TooltipContent>{intl.formatMessage(i18n.generateDiagnosticsBundle)}</TooltipContent>
               </Tooltip>
             )}
 
@@ -1691,7 +1709,7 @@ export default function ChatInput({
                   <Attach className="w-4 h-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Attach file</TooltipContent>
+              <TooltipContent>{intl.formatMessage(i18n.attachFile)}</TooltipContent>
             </Tooltip>
           </>
         )}
@@ -1734,9 +1752,15 @@ export default function ChatInput({
             </TooltipTrigger>
             <TooltipContent>
               {!isEnabled ? (
-                <p>Dictation not configured (Settings)</p>
+                <p>{intl.formatMessage(i18n.dictationNotConfiguredSettings)}</p>
               ) : (
-                <p>Voice dictation{isRecording ? '' : ' • Say "submit" to send'}</p>
+                <p>
+                    {intl.formatMessage(i18n.voiceDictationTooltip, {
+                      submitHint: isRecording
+                        ? ''
+                        : intl.formatMessage(i18n.voiceDictationSubmitHint),
+                    })}
+                  </p>
               )}
             </TooltipContent>
           </Tooltip>
@@ -1750,7 +1774,7 @@ export default function ChatInput({
             size="sm"
             shape="round"
             variant="ghost"
-            aria-label="Stop"
+            aria-label={intl.formatMessage(i18n.stop)}
             className="bg-background-tertiary text-text-primary hover:bg-background-tertiary/70"
           >
             <Stop />

@@ -35,6 +35,7 @@ const i18n = defineMessages({
   invalidFileType: { id: 'scheduleModal.invalidFileType', defaultMessage: 'Invalid file type: Please select a YAML file (.yaml or .yml)' },
   scheduleIdRequired: { id: 'scheduleModal.scheduleIdRequired', defaultMessage: 'Schedule ID is required.' },
   provideValidRecipe: { id: 'scheduleModal.provideValidRecipe', defaultMessage: 'Please provide a valid recipe source.' },
+  clockIconAlt: { id: 'scheduleModal.clockIconAlt', defaultMessage: 'Clock' },
 });
 
 export interface NewSchedulePayload {
@@ -196,7 +197,7 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
       <Card className="w-full max-w-md bg-background-primary shadow-xl rounded-3xl z-50 flex flex-col max-h-[90vh] overflow-hidden">
         <div className="px-8 pt-6 pb-4 flex-shrink-0">
           <div className="flex items-center gap-3">
-            <img src={ClockIcon} alt="Clock" className="w-8 h-8" />
+            <img src={ClockIcon} alt={intl.formatMessage(i18n.clockIconAlt)} className="w-8 h-8" />
             <div className="flex-1">
               <h2 className="text-base font-semibold text-text-primary">
                 {isEditMode ? intl.formatMessage(i18n.editSchedule) : intl.formatMessage(i18n.createNewSchedule)}

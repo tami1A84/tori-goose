@@ -66,6 +66,7 @@ const i18n = defineMessages({
   reportBug: { id: 'settings.help.reportBug', defaultMessage: 'Report a Bug' },
   requestFeature: { id: 'settings.help.requestFeature', defaultMessage: 'Request a Feature' },
   versionTitle: { id: 'settings.version.title', defaultMessage: 'Version' },
+  blockLogoAlt: { id: 'settings.version.blockLogoAlt', defaultMessage: 'Block Logo' },
   updatesTitle: { id: 'settings.updates.title', defaultMessage: 'Updates' },
   updatesDesc: {
     id: 'settings.updates.description',
@@ -447,7 +448,7 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
             <div className="flex items-center gap-3">
               <img
                 src={isDarkMode ? BlockLogoWhite : BlockLogoBlack}
-                alt="Block Logo" // TODO: replace with AAIF logo asset
+                alt={intl.formatMessage(i18n.blockLogoAlt)} // TODO: replace with AAIF logo asset
                 className="h-8 w-auto"
               />
               <span className="text-2xl font-mono text-black dark:text-white">

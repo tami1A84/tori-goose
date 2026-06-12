@@ -49,7 +49,9 @@ export default function ExtensionTimeoutField({
           className={`${!submitAttempted || isTimeoutValid() ? 'border-border-primary' : 'border-red-500'} text-text-primary focus:border-border-primary`}
         />
         {submitAttempted && !isTimeoutValid() && (
-          <div className="absolute text-xs text-red-500 mt-1">Timeout </div>
+          <div className="absolute text-xs text-red-500 mt-1">
+            {intl.formatMessage(i18n.timeoutLabel)}
+          </div>
         )}
       </div>
     </div>

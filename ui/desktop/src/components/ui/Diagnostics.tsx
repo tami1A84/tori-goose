@@ -36,6 +36,7 @@ const i18n = defineMessages({
     defaultMessage:
       'If your session contains sensitive information, do not share the diagnostics file publicly.',
   },
+  warningLabel: { id: 'diagnosticsModal.warningLabel', defaultMessage: 'Warning:' },
   attachHint: {
     id: 'diagnosticsModal.attachHint',
     defaultMessage: 'If you file a bug, consider attaching the diagnostics report to it.',
@@ -221,7 +222,7 @@ Add any other context about the problem here.
               <li>{intl.formatMessage(i18n.configSettings)}</li>
             </ul>
             <p className="text-sm text-text-secondary">
-              <strong>Warning:</strong> {intl.formatMessage(i18n.sensitiveWarning)}
+              <strong>{intl.formatMessage(i18n.warningLabel)}</strong> {intl.formatMessage(i18n.sensitiveWarning)}
             </p>
             <p className="text-sm text-text-secondary">
               {intl.formatMessage(i18n.attachHint)}

@@ -8,7 +8,7 @@ import { client } from './api/client.gen';
 import { setTelemetryEnabled } from './utils/analytics';
 import { readConfig } from './api';
 import { applyThemeTokens } from './theme/theme-tokens';
-import { currentLocale, currentMessageLocale, loadMessages } from './i18n';
+import { currentLocale, currentMessageLocale, loadMessages, defineMessages } from './i18n';
 
 // Apply theme tokens to :root before first paint.
 applyThemeTokens();
@@ -16,6 +16,13 @@ applyThemeTokens();
 const App = lazy(() => import('./App'));
 
 const TELEMETRY_CONFIG_KEY = 'GOOSE_TELEMETRY_ENABLED';
+
+const i18n = defineMessages({
+  failedToStartGooseBackend: {
+    id: 'renderer.failedToStartGooseBackend',
+    defaultMessage: 'Failed to start goose backend process',
+  },
+});
 
 let warnedFallbackLocale = false;
 function handleIntlError(err: { code: string; message?: string }) {
@@ -32,13 +39,17 @@ function handleIntlError(err: { code: string; message?: string }) {
 }
 
 (async () => {
+  const messages = await loadMessages(currentMessageLocale);
+  const failedToStartBackendMessage =
+    messages[i18n.failedToStartGooseBackend.id] ?? i18n.failedToStartGooseBackend.defaultMessage;
+
   // Check if we're in the launcher view (doesn't need goosed connection)
   const isLauncher = window.location.hash === '#/launcher';
 
   if (!isLauncher) {
     const gooseApiHost = await window.electron.getGoosedHostPort();
     if (gooseApiHost === null) {
-      window.alert('failed to start goose backend process');
+      window.alert(failedToStartBackendMessage);
       return;
     }
     client.setConfig({
@@ -59,8 +70,6 @@ function handleIntlError(err: { code: string; message?: string }) {
       console.warn('[Analytics] Failed to initialize analytics:', error);
     }
   }
-
-  const messages = await loadMessages(currentMessageLocale);
 
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
